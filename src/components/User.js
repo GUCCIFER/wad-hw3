@@ -1,7 +1,10 @@
-function User(first, last, birth, fac, grade) {
-    this.firstname = first;
-    this.lastname = last;
-    this.birthdate = birth;
-    this.faculty = fac;
-    this.gpa = grade;
+export default class User {
+
+    constructor(first, last, birth, fac, grade) {
+        this.first = first;
+        this.last = last;
+        this.birth = birth;
+        this.fac = fac;
+        this.grade = grade;
+    }
 }

@@ -11,30 +11,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Agile software development</td>
-                <td>1</td>
-                <td>82</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>System modeling</td>
-                <td>1</td>
-                <td>85</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Object-oriented programming</td>
-                <td>2</td>
-                <td>99</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Estonian language Level A2</td>
-                <td>2</td>
-                <td>65</td>
-            </tr>
+                <tr v-for="(course, index) in coursesProp" :key="index">
+                    <td>{{index+1}}</td>
+                    <td>{{course.title}}</td>
+                    <td>{{course.semester}}</td>
+                    <td>{{course.grade}}</td>
+                </tr>
             </tbody>
         </table>
         <br>
@@ -42,32 +24,49 @@
         <div>
             <button id="add-course-button" @click="showInput" class="blue-button">+</button>
             <span v-bind:id=add_course>
-                                <input class="input" type="text" placeholder="Course title" id="title">
-                                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
-                                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
-                                <button class="green-button" id="save-course">Save</button>
-                                <button class="grey-button" id="cancel-course">Cancel</button>
+                <input class="input" type="text" v-model="title" placeholder="Course title" id="title">
+                <input class="input" type="number" v-model="semester" min="1" max="8" placeholder="Semester" id="semester" ref="semester">
+                <input class="input" type="number" v-model="grade" min="0" max="100" placeholder="Grade" id="grade" ref="grade">
+                <button class="green-button" id="save-course" @click="addCourse">Save</button>
+                <button class="grey-button" id="cancel-course">Cancel</button>
             </span>
         </div>
     </div>
 </template>
 
 <script>
-
+    import Course from "./Course";
 
     export default {
         name: "Courses",
         data: () => {
             return {
+                title: "",
+                semester: "",
+                grade: "",
                 add_course:'add-course'
             }
         },
+
+        props:{
+            coursesProp: Array
+        },
+
         methods: {
             showInput: function () {
                 if (this.add_course === 'add-course')
                     this.add_course = 'add-course-active';
                 else
                     this.add_course = 'add-course';
+            },
+
+            addCourse: function(){
+                let course = new Course(this.title, this.semester, this.grade);
+                this.coursesProp.push(course);
+                this.title = "";
+                this.semester = "";
+                this.grade = "";
+                this.add_course = 'add-course'
             }
         }
     }

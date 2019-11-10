@@ -1,5 +1,7 @@
-function Course(title, semester, grade) {
-    this.title = title;
-    this.semester = semester;
-    this.grade = grade;
+export default class Course {
+    constructor(title, semester, grade) {
+        this.title = title;
+        this.semester = semester;
+        this.grade = grade;
+    }
 }

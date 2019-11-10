@@ -6,8 +6,8 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile v-bind:class="{'tab active':isOn, 'tab':isOff}"/>
-                    <Courses v-bind:class="{'tab active':isOff, 'tab':isOn}"/>
+                    <Profile :userProp="user" :coursesProp="courses" v-bind:class="{'tab active':isOn, 'tab':isOff}"/>
+                    <Courses :coursesProp="courses" v-bind:class="{'tab active':isOff, 'tab':isOn}"/>
                 </div>
                 <div class="controls">
                     <button id="profile-button" @click="change" v-bind:class="{'pill active':isOn, 'pill': isOff}">Profile</button>
@@ -23,18 +23,29 @@
     import Courses from "./components/Courses";
     import Profile from "./components/Profile";
     import Footer from "./components/Footer";
+    import User from "./components/User";
+    import Course from "./components/Course";
+
     export default {
         name: 'app',
         components: {Courses, Profile, Footer},
+
         data: () => {
             return {
                 isOn: true,
-                isOff: false
+                isOff: false,
+                user: new User("Martin", "Vahe", "11.11.2001", "IT", "1.88"),
+                courses: [
+                    new Course("Business Analysis", 1, 70),
+                    new Course("Computer Graphics", 1, 84),
+                    new Course("Artificial Intelligence", 2, 56),
+                    new Course("Neural Networks", 2, 71)
+                ]
             }
         },
         methods: {
             change: function () {
-                if (this.isOn === true){
+                if (this.isOn){
                     this.isOn = false;
                     this.isOff = true;
                 }
