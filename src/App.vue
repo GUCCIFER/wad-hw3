@@ -1,61 +1,21 @@
 <template>
     <main id="app">
-        <header>
-            <strong>Welcome to your dashboard!</strong>
-        </header>
-        <section id="container">
-            <section id="main">
-                <div class="content">
-                    <Profile :userProp="user" :coursesProp="courses" v-bind:class="{'tab active':isOn, 'tab':isOff}"/>
-                    <Courses :coursesProp="courses" v-bind:class="{'tab active':isOff, 'tab':isOn}"/>
-                </div>
-                <div class="controls">
-                    <button id="profile-button" @click="change" v-bind:class="{'pill active':isOn, 'pill': isOff}">Profile</button>
-                    <button id="courses-button" @click="change" v-bind:class="{'pill active':isOff, 'pill': isOn}">Courses</button>
-                </div>
-            </section>
-        </section>
+        <Header/>
+        <Main/>
         <Footer/>
     </main>
 </template>
 
 <script>
-    import Courses from "./components/Courses";
-    import Profile from "./components/Profile";
+
     import Footer from "./components/Footer";
-    import User from "./components/User";
-    import Course from "./components/Course";
+
+    import Header from "./components/Header";
+    import Main from "./components/Main";
 
     export default {
         name: 'app',
-        components: {Courses, Profile, Footer},
-
-        data: () => {
-            return {
-                isOn: true,
-                isOff: false,
-                user: new User("Martin", "Vahe", "11.11.2001", "IT", "1.88"),
-                courses: [
-                    new Course("Business Analysis", 1, 70),
-                    new Course("Computer Graphics", 1, 84),
-                    new Course("Artificial Intelligence", 2, 56),
-                    new Course("Neural Networks", 2, 71)
-                ]
-            }
-        },
-        methods: {
-            change: function () {
-                if (this.isOn){
-                    this.isOn = false;
-                    this.isOff = true;
-                }
-                else {
-                    this.isOn = true;
-                    this.isOff = false;
-                }
-            }
-        }
-
+        components: {Footer, Header, Main},
     }
 </script>
 
@@ -64,6 +24,7 @@
         box-sizing: border-box;
         font-family: 'Livvic', sans-serif;
     }
+
     html, body {
         padding: 0;
         margin: 0;
@@ -71,14 +32,17 @@
         height: 100%;
         background-color: #eaeaea;
     }
+
     main {
         position: relative;
         min-height: 100%;
         padding-bottom: 110px;
     }
+
     .clear-fix {
         clear: both;
     }
+
     header {
         padding: 20px;
         background-color: #2196F3;
@@ -87,6 +51,7 @@
         margin-bottom: 10px;
         height: 60px;
     }
+
     footer {
         padding: 30px 0;
         background-color: #607D8B;
@@ -96,6 +61,7 @@
         bottom: 0;
         width: 100%;
     }
+
     footer .links {
         display: block;
         width: 100%;
@@ -104,13 +70,16 @@
         color: #acd7ff;
         font-size: 11px;
     }
+
     footer .links a {
         text-decoration: none;
         color: #acd7ff;
     }
+
     footer .links a:hover {
         text-decoration: underline;
     }
+
     #container {
         width: 80%;
         max-width: 900px;
@@ -119,29 +88,36 @@
         background-color: #ffffff;
         margin: 0 auto;
     }
+
     #profile {
         border-bottom: 1px dashed #a7a7a7;
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
+
     #profile div:not(.clear-fix) {
         height: 190px;
         float: left;
         position: relative;
     }
+
     #profile .avatar {
         width: 35%;
         text-align: center;
     }
+
     #profile .avatar img {
         width: 180px;
     }
+
     #profile .info {
         width: 45%;
     }
+
     #profile #gpa {
         width: 20%;
     }
+
     #profile #gpa strong {
         position: absolute;
         width: 100%;
@@ -155,14 +131,17 @@
         line-height: 60px;
         text-align: center;
     }
+
     .content {
         padding: 10px;
         border: 1px solid #cbcbcb;
     }
+
     table {
         width: 100%;
         border-collapse: collapse;
     }
+
     table th {
         padding: 8px 12px;
         text-align: left;
@@ -170,16 +149,20 @@
         background-color: #03A9F4;
         color: #ffffff;
     }
+
     table td {
         padding: 8px 12px;
         border: 1px solid #cbcbcb;
     }
+
     .content .tab {
         display: none;
     }
+
     .content .tab.active {
         display: block;
     }
+
     .controls .pill {
         border: 1px solid #cbcbcb;
         background-color: #eaeaea;
@@ -190,39 +173,47 @@
         margin-top: -1px;
         outline: none !important;
     }
+
     .controls .pill.active {
         background-color: #ffffff;
         border-top: 1px solid #ffffff;
     }
+
     .controls .pill:hover {
         cursor: pointer;
     }
+
     .blue-button {
         background-color: #2196F3;
         color: #ffffff;
         border: none;
         padding: 10px 20px;
     }
+
     .green-button {
         background-color: #69f378;
         color: #ffffff;
         border: none;
         padding: 10px 10px;
     }
+
     .grey-button {
         background-color: #e1e8e6;
         color: #ffffff;
         border: none;
         padding: 10px 20px;
     }
+
     .input {
         border: 1px solid #cccccc;
         padding: 10px 20px;
         min-width: 135px;
     }
+
     #add-course {
         display: none;
     }
+
     #add-course-active {
         display: block;
     }
