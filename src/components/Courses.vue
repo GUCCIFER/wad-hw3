@@ -28,7 +28,7 @@
                 <input class="input" type="number" v-model="semester" min="1" max="8" placeholder="Semester" id="semester" ref="semester">
                 <input class="input" type="number" v-model="grade" min="0" max="100" placeholder="Grade" id="grade" ref="grade">
                 <button class="green-button" id="save-course" @click="addCourse">Save</button>
-                <button class="grey-button" id="cancel-course">Cancel</button>
+                <button class="grey-button" id="cancel-course" @click="resetInput">Cancel</button>
             </span>
         </div>
     </div>
@@ -67,6 +67,17 @@
                 this.semester = "";
                 this.grade = "";
                 this.add_course = 'add-course'
+            },
+
+            resetInput: function(){
+                this.title = "";
+                this.semester = "";
+                this.grade = "";
+                if (this.add_course === 'add-course')
+                    this.add_course = 'add-course-active';
+                else
+                    this.add_course = 'add-course';
+                
             }
         }
     }
