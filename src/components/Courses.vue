@@ -73,11 +73,7 @@
                 this.title = "";
                 this.semester = "";
                 this.grade = "";
-                if (this.add_course === 'add-course')
-                    this.add_course = 'add-course-active';
-                else
-                    this.add_course = 'add-course';
-                
+                this.showInput();
             }
         }
     }
